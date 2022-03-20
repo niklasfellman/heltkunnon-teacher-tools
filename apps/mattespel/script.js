@@ -2,6 +2,9 @@ const answerBox = document.querySelector(".answer")
 const questionBox = document.querySelector(".question")
 const historyBox = document.querySelector(".history")
 
+const resultBtn = document.querySelector(".results")
+const resultsPage = document.querySelector(".resultspage")
+
 const keypad = document.querySelector(".keypad")
 
 let history = []
@@ -26,6 +29,12 @@ let createHistory = function (q, a, r) {
     sessionHistoryArr.push(newHistory.innerText)
     sessionStorage.test = sessionHistoryArr
     console.log(sessionStorage.test)
+
+    let resultsPagePost = document.createElement("div")
+    resultsPagePost.innerText = `${q} ${a}`
+    if(!r)resultsPagePost.style.color="red"
+    resultsPage.append(resultsPagePost)
+
 }
 
 let multiplication = true;
@@ -131,4 +140,13 @@ document.addEventListener("keydown", (e) => {
 keypad.addEventListener("click", (x) => {
     handleKey(x.target.dataset.id)
     answerBox.innerText = myAnswer
+})
+
+
+resultBtn.addEventListener("click", ()=>{
+    console.log("result clicked")
+
+
+    resultsPage.classList.toggle("resultspage-active")
+
 })
