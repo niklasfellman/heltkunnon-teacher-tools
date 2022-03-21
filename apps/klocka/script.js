@@ -8,7 +8,6 @@ const domScore = document.querySelector(".score")
 const settings = document.querySelector(".settings-page")
 const settingsButton = document.querySelector(".settings-button")
 let settingsBoxes = document.querySelectorAll(".settings-box")
-console.log(settingsBoxes)
 
 const root = document.documentElement;
 root.style.setProperty("--minute-hand-deg", "180deg")
@@ -111,8 +110,6 @@ let assignmentTime;
 let score = 0
 let attempts = 0
 
-
-
 function createRound(s) {
   for (let i = 0; i < 6; i++) {
     arr.push(new Clock(settingsMinutes(s), getRandom(1, 12), i))
@@ -133,17 +130,10 @@ rightWrong.className="right-wrong"
 rightWrong.innerText = x === 0 ? "pröva igen" : "rätt!"
 document.body.appendChild(rightWrong)
 }
-
 createRound(setting)
 board.addEventListener("click", (e) => {
-  
-
   if(e.target.dataset?.id){
   let clicked = (e.target.dataset.id)
-
-  console.log(arr[clicked].time)
-  console.log(assignmentTime)
-
   if (arr[clicked].time.minute === assignmentTime.minute && arr[clicked].time.hour === assignmentTime.hour) {
 rightWrong.remove()
 showRightWrong(1) 
@@ -164,11 +154,9 @@ arr[clicked].dom.style.boxShadow = "0 0 0 0.3vmin black,0 0 0 1.5vmin red,0 0 0 
   }
   domScore.innerText = `${score}/${attempts} - ${Math.floor((score / attempts) * 100)}% `
 })
-
 settingsButton.addEventListener("click", ()=>{
   settings.classList.toggle("visible")
 })
-
 settings.addEventListener("click", (x)=>{
   console.log(x)
   let tempSetting = ""
@@ -182,11 +170,9 @@ settings.addEventListener("click", (x)=>{
     }
   }
   setting = tempSetting
-
   for(let i = 0;i<arr.length;i++){
     arr[i].dom.remove()
   }
   arr = []
   createRound(tempSetting)
-
 })
