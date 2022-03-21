@@ -5,29 +5,18 @@ const from = document.querySelectorAll('.from');
 const to = document.querySelectorAll('.to');
 let arrFrom = [];
 let arrTo = [];
-// size = 10;
-
-// addBtn.addEventListener('click', () => {
-//         arrFrom.push(document.createElement("input"));
-//         arrTo.push(document.createElement("input"));
-//         gridLeftTop.appendChild(arrFrom);
-//         gridLeftTop.appendChild(arrTo);
-// })
-
-
-// for (let i = 0; i < size; i++) {
-//     removeBtn.addEventListener('click', () => {
-//         gridLeftTop.removeChild(gridLeftTop.lastChild);
-//         gridLeftTop.removeChild(gridLeftTop.lastChild);
-//     })
-// }
-
-// console.log(arrFrom);
-
 
 removeBtn.addEventListener('click', () => {
-    gridLeftTop.removeChild(gridLeftTop.lastChild);
-    gridLeftTop.removeChild(gridLeftTop.lastChild);
+    if (arrFrom.length <= 0) {
+        return false;
+    } else {
+        arrFrom.pop();
+        arrTo.pop();
+        gridLeftTop.removeChild(gridLeftTop.lastChild);
+        gridLeftTop.removeChild(gridLeftTop.lastChild);
+    }
+    console.log(arrFrom);
+    console.log(arrTo);
 })
 
 addBtn.addEventListener('click', () => {
@@ -35,6 +24,10 @@ addBtn.addEventListener('click', () => {
     var boxTo = document.createElement("input");
     boxFrom.classList.add('from');
     boxTo.classList.add('to');
+    arrFrom.push(boxFrom);
+    arrTo.push(boxTo);
     gridLeftTop.appendChild(boxFrom);
     gridLeftTop.appendChild(boxTo);
+    console.log(arrFrom);
+    console.log(arrTo);
 })
