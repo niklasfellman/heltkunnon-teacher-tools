@@ -31,3 +31,22 @@ addBtn.addEventListener('click', () => {
     console.log(arrFrom);
     console.log(arrTo);
 })
+
+
+/* !  
+
+addBtn.addEventListener('click', () => {
+    arrFrom.push(document.createElement("input"))
+    arrFrom.at(-1).classList.add("from")
+
+    arrTo.push(document.createElement("input"))
+    arrTo.at(-1).classList.add("to")
+
+    gridLeftTop.append(arrFrom.at(-1));
+    gridLeftTop.append(arrTo.at(-1));
+
+    console.log(arrFrom);
+    console.log(arrTo);
+}) 
+
+*/

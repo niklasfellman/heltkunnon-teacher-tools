@@ -15,7 +15,6 @@ body {
     height: 100vh;
     overflow: hidden;
     margin: 0;
-    
 }
 
 .container {
@@ -29,7 +28,6 @@ body {
     padding: 20px 40px;
     width: 30vw;
     text-align: center;
-    line-height: 0;
 }
 
 h2 {
