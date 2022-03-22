@@ -117,6 +117,7 @@ nav {
     position: absolute;
     z-index:100;
     visibility: hidden;
+    color:#fff
 }
 
 .resultspage-active{

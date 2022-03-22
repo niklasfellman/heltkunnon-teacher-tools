@@ -10,32 +10,50 @@ const keypad = document.querySelector(".keypad")
 let history = []
 let sessionHistoryArr = []
 
-if (sessionStorage.test != null) {
-
-    console.log(sessionStorage.test)
-
-    sessionHistoryArr.push(sessionStorage.test)
-}
 
 let createHistory = function (q, a, r) {
+    nrAnswers ++
     let newHistory = document.createElement("span")
     newHistory.innerText = `${q} ${a}`
+
     if (!r) {
         newHistory.classList.add("wrong")
     }
+
     history.push(newHistory)
     historyBox.prepend(history[history.length - 1])
 
-    sessionHistoryArr.push(newHistory.innerText)
-    sessionStorage.test = sessionHistoryArr
-    console.log(sessionStorage.test)
+    if (!(nrAnswers in sessionStorage)) {
+    sessionStorage[nrAnswers] = `${q} ${a}`
+    console.log("added to session")
+    }    
 
     let resultsPagePost = document.createElement("div")
     resultsPagePost.innerText = `${q} ${a}`
     if(!r)resultsPagePost.style.color="red"
     resultsPage.append(resultsPagePost)
-
 }
+
+let nrAnswers = 0
+
+function calcHelper(t1,t2,m,a){
+if (m === "x") return (parseInt(t1) * parseInt(t2) === parseInt(a))
+if (m === "-") return (parseInt(t1) - parseInt(t2) === parseInt(a))
+if (m === "+") return (parseInt(t1) + parseInt(t2) === parseInt(a))
+if (m === ":") return (parseInt(t1) / parseInt(t2) === parseInt(a))
+}
+
+
+if (sessionStorage != null) {
+    for(let i = 0;i< sessionStorage.length;i++){
+        let key = sessionStorage.key(i)
+        if (key === "IsThisFirstTime_Log_From_LiveServer") continue
+        let current = sessionStorage[key].split(" ")
+        createHistory(`${current[0]} ${current[1]} ${current[2]} = `, current[4], calcHelper(current[0],current[2],current[1],current[4]))
+    }
+}
+
+
 
 let multiplication = true;
 let division = true;
@@ -53,12 +71,10 @@ let generateQuestion = function () {
     if (addition === true) methods.push("a")
     if (subtraction === true) methods.push("s")
 
-    console.log(methods)
     let method = methods[Math.floor(Math.random() * (methods.length))]
 
     switch (method) {
         case "m":
-            console.log("multiplication fuck yyyeeeah!!")
 
             let terms = [Math.ceil(Math.random() * 10), Math.ceil(Math.random() * 10)]
             question = `${terms[0]} x ${terms[1]} =`
@@ -66,7 +82,6 @@ let generateQuestion = function () {
 
             break;
         case "d":
-            console.log("division fuuuck yeaeaah")
 
             let factors = [Math.ceil(Math.random() * 10), Math.ceil(Math.random() * 10)]
             question = `${factors[0] * factors[1]} : ${factors[0]} =`
@@ -74,7 +89,6 @@ let generateQuestion = function () {
 
             break;
         case "s":
-            console.log("subtraction fuuuck yeah")
 
             let subTerms = [Math.ceil(Math.random() * 100), Math.ceil(Math.random() * 100)]
 
@@ -84,7 +98,6 @@ let generateQuestion = function () {
 
             break;
         default:
-            console.log("addition, fuuuck yeah")
 
             let addTerms = [Math.ceil(Math.random() * 100), Math.ceil(Math.random() * 100)]
             
