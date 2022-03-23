@@ -4,6 +4,7 @@ const historyBox = document.querySelector(".history")
 
 const resultBtn = document.querySelector(".results")
 const resultsPage = document.querySelector(".resultspage")
+const resultsBoard = document.querySelector(".resultsboard")
 
 const keypad = document.querySelector(".keypad")
 
@@ -31,7 +32,7 @@ let createHistory = function (q, a, r) {
     let resultsPagePost = document.createElement("div")
     resultsPagePost.innerText = `${q} ${a}`
     if(!r)resultsPagePost.style.color="red"
-    resultsPage.append(resultsPagePost)
+    resultsBoard.append(resultsPagePost)
 }
 
 let nrAnswers = 0
@@ -158,8 +159,11 @@ keypad.addEventListener("click", (x) => {
 
 resultBtn.addEventListener("click", ()=>{
     console.log("result clicked")
+    resultsPage.classList.toggle("resultspage-active")
+})
 
+resultsPage.addEventListener("click", (x)=>{
+    console.log(x)
 
     resultsPage.classList.toggle("resultspage-active")
-
 })

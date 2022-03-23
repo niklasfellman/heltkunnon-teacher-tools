@@ -111,17 +111,35 @@ nav {
 }
 
 .resultspage {
-    width:100vw;
-    height:100vh;
-    background:rgba(68, 54, 54,0.5);
+    width: 100%;
+    min-height:calc(100vh - 5vmin);
     position: absolute;
     z-index:100;
     visibility: hidden;
-    color:#fff
+    color:rgb(0, 0, 0);
+    margin-top:5vmin;
+    display: flex;
+    justify-content: center;
+    font-weight: 600;
+backdrop-filter: blur(10px);
+background: rgba(255, 255, 255, 0.034);
 }
+
 
 .resultspage-active{
 
     visibility: visible;
 
+}
+
+.resultsboard {
+
+    background:white;
+    width:30vmin;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    height:fit-content;
+    padding:5vmin;
+    border-radius: 3vmin;
 }
