@@ -129,9 +129,6 @@ nav {
 }
 
 
-.active {
-    visibility: visible;
-}
 
 .results-board {
 
@@ -146,18 +143,52 @@ nav {
 }
 
 .settings-page {
-
+    min-height:calc(100vh - 5vmin);
     background-color: rgb(185, 185, 185);
-    width:80vmin;
-    display:grid;
-    padding:1rem;
-    gap:1rem;
+    width:100%;
+    display:flex;
+    justify-content: center;
+    position: absolute;
+    margin-top: 5vmin;
+    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.034);
+    visibility: hidden;
+}
 
+.settings-board{
+    width:70vmin;
+    display: flex;
+    background-color: rgb(230, 230, 230);
+    box-shadow: 0 10px 10px 5px rgba(0, 0, 0, 0.11);
+    padding:5vmin;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    height:fit-content;
+    border-radius: 5vmin;
 }
 
 .addition, .subtraction, .multiplication, .division{
     display: flex;
+    flex-direction: column;
     background-color: #fff;
     padding:.5rem;
     min-height:2rem;
+    width:30vmin;
+
+}
+
+.additional-options {
+    display: flex;
+    height:0px;
+    overflow: hidden;
+}
+
+.options-box{
+
+    height:2rem;
+
+}
+
+.active {
+    visibility: visible;
 }

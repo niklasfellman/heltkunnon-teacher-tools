@@ -6,6 +6,13 @@ const resultBtn = document.querySelector(".results")
 const resultsPage = document.querySelector(".results-page")
 const resultsBoard = document.querySelector(".results-board")
 
+const settingsBtn = document.querySelector(".settings")
+const settingsPage = document.querySelector(".settings-page")
+
+const optionsBoxes = document.querySelectorAll(".options-box")
+
+console.log(settingsPage)
+
 const keypad = document.querySelector(".keypad")
 
 let history = []
@@ -52,10 +59,10 @@ if (sessionStorage != null) {
     }
 }
 
-let multiplication = true;
-let division = true;
+let multiplication = false;
+let division = false;
 let addition = true;
-let subtraction = true;
+let subtraction = false;
 
 let question;
 let answer;
@@ -87,16 +94,16 @@ let generateQuestion = function () {
             break;
         case "subtraction":
 
-            let subTerms = [Math.ceil(Math.random() * 100), Math.ceil(Math.random() * 100)]
+            let subTerms = [Math.ceil(Math.random() * 50), Math.ceil(Math.random() * 50)]
 
             subTerms = subTerms.sort((a, b) => a - b);
             question = `${subTerms[1]} - ${subTerms[0]} =`
             answer = subTerms[1] - subTerms[0]
 
             break;
-        default:
+        case "addition":
 
-            let addTerms = [Math.ceil(Math.random() * 100), Math.ceil(Math.random() * 100)]
+            let addTerms = [Math.ceil(Math.random() * 50), Math.ceil(Math.random() * 50)]
 
             question = `${addTerms[0]} + ${addTerms[1]} = `
             answer = addTerms[0] + addTerms[1]
@@ -104,6 +111,7 @@ let generateQuestion = function () {
             break;
     }
 
+    console.log(question)
     questionBox.innerText = question
 }
 
@@ -162,4 +170,35 @@ resultsPage.addEventListener("click", (x) => {
     console.log(x)
 
     resultsPage.classList.toggle("active")
+})
+
+settingsBtn.addEventListener("click", ()=>{
+    console.log("settings opened")
+    settingsPage.classList.toggle("active")
+})
+
+console.log(optionsBoxes)
+
+settingsPage.addEventListener("click", (x)=>{
+    console.log(x)
+    if (x.target === optionsBoxes[0]){
+        console.log(addition)
+        x.target.checked ? addition = false : addition = true
+        generateQuestion()
+    }
+    if (x.target === optionsBoxes[1]){
+        console.log(subtraction)
+        x.target.checked ? subtraction = false : subtraction = true
+        generateQuestion()
+    }
+    if (x.target === optionsBoxes[2]){
+        console.log(multiplication)
+        x.target.checked ? multiplication = false : multiplication = true
+        generateQuestion()
+    }
+    if (x.target === optionsBoxes[3]){
+        console.log(division)
+        x.target.checked ? division = false : division = true
+        generateQuestion()
+    }
 })
