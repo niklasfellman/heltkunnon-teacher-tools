@@ -107,10 +107,11 @@ nav {
 
 }
 
-.results {
+.results, .settings{
     z-index: 101;
     cursor: pointer;
     user-select: none;
+    font-weight: 200;
 }
 
 .results-page {

@@ -11,7 +11,6 @@ const settingsPage = document.querySelector(".settings-page")
 
 const optionsBoxes = document.querySelectorAll(".options-box")
 
-console.log(settingsPage)
 
 const keypad = document.querySelector(".keypad")
 
@@ -64,6 +63,8 @@ let division = false;
 let addition = true;
 let subtraction = false;
 
+let challangeMode = false
+
 let question;
 let answer;
 let generateQuestion = function () {
@@ -111,7 +112,6 @@ let generateQuestion = function () {
             break;
     }
 
-    console.log(question)
     questionBox.innerText = question
 }
 
@@ -120,10 +120,24 @@ generateQuestion()
 let myAnswer = ""
 
 function handleKey(key) {
+
+
     if (key === "Backspace") {
         myAnswer = myAnswer.slice(0, myAnswer.length - 1)
+    } 
+   
+    else if (challangeMode && answerBox.innerText + key == answer){
+        console.log("riiiight")
+        createHistory(question, (myAnswer + key), (myAnswer + key) == answer)
+            console.log("right answer - - - add some animation and score")
+            generateQuestion()
+            myAnswer = ""
+            answerBox.innerText = myAnswer
+            answerBox.classList.remove("wrong")
+            return
+    }
 
-    } else if (key === "Enter") {
+    else if (key === "Enter") {
         createHistory(question, myAnswer, myAnswer == answer)
         if (myAnswer == answer) {
             console.log("right answer - - - add some animation and score")
@@ -152,7 +166,6 @@ document.addEventListener("keydown", (e) => {
     // * have to use + e.key because the input don't see the last input
     handleKey(e.key)
     answerBox.innerText = myAnswer
-    console.log(history)
 })
 
 keypad.addEventListener("click", (x) => {
@@ -167,8 +180,6 @@ resultBtn.addEventListener("click", () => {
 })
 
 resultsPage.addEventListener("click", (x) => {
-    console.log(x)
-
     resultsPage.classList.toggle("active")
 })
 
@@ -177,28 +188,26 @@ settingsBtn.addEventListener("click", ()=>{
     settingsPage.classList.toggle("active")
 })
 
-console.log(optionsBoxes)
 
 settingsPage.addEventListener("click", (x)=>{
-    console.log(x)
     if (x.target === optionsBoxes[0]){
+        !x.target.checked ? addition = false : addition = true
         console.log(addition)
-        x.target.checked ? addition = false : addition = true
         generateQuestion()
     }
     if (x.target === optionsBoxes[1]){
         console.log(subtraction)
-        x.target.checked ? subtraction = false : subtraction = true
+        !x.target.checked ? subtraction = false : subtraction = true
         generateQuestion()
     }
     if (x.target === optionsBoxes[2]){
         console.log(multiplication)
-        x.target.checked ? multiplication = false : multiplication = true
+        !x.target.checked ? multiplication = false : multiplication = true
         generateQuestion()
     }
     if (x.target === optionsBoxes[3]){
         console.log(division)
-        x.target.checked ? division = false : division = true
+        !x.target.checked ? division = false : division = true
         generateQuestion()
     }
 })
