@@ -13,7 +13,8 @@ body {
 }
 
 
-.board, .history {
+.board,
+.history {
     width: 80vmin;
     background: rgb(36, 36, 36);
     font-size: 6vmin;
@@ -43,25 +44,25 @@ body {
 }
 
 .question {
-    color:white
+    color: white
 }
 
 .answer {
     background-color: rgb(24, 24, 24);
-    font-size:5vmin;
+    font-size: 5vmin;
     font-family: 'Roboto Slab', serif;
-    color:#fff;
+    color: #fff;
     text-align: center;
-    padding:10px;
-    border:none;
+    padding: 10px;
+    border: none;
     cursor: pointer;
 }
 
-.answer:hover{
-    background: rgb(30,30,30);
+.answer:hover {
+    background: rgb(30, 30, 30);
 }
 
-.answer:active{
+.answer:active {
     background: red;
 }
 
@@ -72,11 +73,11 @@ body {
     gap: 1px;
     width: 30vmin;
     height: 40vmin;
-    color:#fff;
+    color: #fff;
     font-size: 4vmin;
 }
 
-.keypad span {
+.keypad div {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -86,7 +87,7 @@ body {
     cursor: pointer;
 }
 
-.keypad span:hover {
+.keypad div:hover {
     background: rgb(255, 114, 71);
 
 }
@@ -97,49 +98,66 @@ body {
 
 nav {
     align-items: center;
-    height:5vmin;
-    display:flex;
-    color:white;
-    width:60vmin;
+    height: 5vmin;
+    display: flex;
+    color: white;
+    width: 60vmin;
     justify-content: space-around;
-    font-size:2vmin;
+    font-size: 2vmin;
 
 }
 
 .results {
-    z-index:101
+    z-index: 101;
+    cursor: pointer;
+    user-select: none;
 }
 
-.resultspage {
+.results-page {
     width: 100%;
-    min-height:calc(100vh - 5vmin);
+    min-height: calc(100vh - 5vmin);
     position: absolute;
-    z-index:100;
+    z-index: 100;
     visibility: hidden;
-    color:rgb(0, 0, 0);
-    margin-top:5vmin;
+    color: rgb(0, 0, 0);
+    margin-top: 5vmin;
     display: flex;
     justify-content: center;
     font-weight: 600;
-backdrop-filter: blur(10px);
-background: rgba(255, 255, 255, 0.034);
+    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.034);
 }
 
 
-.resultspage-active{
-
+.active {
     visibility: visible;
-
 }
 
-.resultsboard {
+.results-board {
 
-    background:white;
-    width:30vmin;
+    background: white;
+    width: 30vmin;
     display: flex;
     align-items: center;
     flex-direction: column;
-    height:fit-content;
-    padding:5vmin;
+    height: fit-content;
+    padding: 5vmin;
     border-radius: 3vmin;
+}
+
+.settings-page {
+
+    background-color: rgb(185, 185, 185);
+    width:80vmin;
+    display:grid;
+    padding:1rem;
+    gap:1rem;
+
+}
+
+.addition, .subtraction, .multiplication, .division{
+    display: flex;
+    background-color: #fff;
+    padding:.5rem;
+    min-height:2rem;
 }

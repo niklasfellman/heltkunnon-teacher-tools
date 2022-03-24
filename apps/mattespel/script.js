@@ -3,17 +3,16 @@ const questionBox = document.querySelector(".question")
 const historyBox = document.querySelector(".history")
 
 const resultBtn = document.querySelector(".results")
-const resultsPage = document.querySelector(".resultspage")
-const resultsBoard = document.querySelector(".resultsboard")
+const resultsPage = document.querySelector(".results-page")
+const resultsBoard = document.querySelector(".results-board")
 
 const keypad = document.querySelector(".keypad")
 
 let history = []
 let sessionHistoryArr = []
 
-
 let createHistory = function (q, a, r) {
-    nrAnswers ++
+    nrAnswers++
     let newHistory = document.createElement("span")
     newHistory.innerText = `${q} ${a}`
 
@@ -25,36 +24,33 @@ let createHistory = function (q, a, r) {
     historyBox.prepend(history[history.length - 1])
 
     if (!(nrAnswers in sessionStorage)) {
-    sessionStorage[nrAnswers] = `${q} ${a}`
-    console.log("added to session")
-    }    
+        sessionStorage[nrAnswers] = `${q} ${a}`
+        console.log("added to session")
+    }
 
     let resultsPagePost = document.createElement("div")
     resultsPagePost.innerText = `${q} ${a}`
-    if(!r)resultsPagePost.style.color="red"
+    if (!r) resultsPagePost.style.color = "red"
     resultsBoard.append(resultsPagePost)
 }
 
 let nrAnswers = 0
 
-function calcHelper(t1,t2,m,a){
-if (m === "x") return (parseInt(t1) * parseInt(t2) === parseInt(a))
-if (m === "-") return (parseInt(t1) - parseInt(t2) === parseInt(a))
-if (m === "+") return (parseInt(t1) + parseInt(t2) === parseInt(a))
-if (m === ":") return (parseInt(t1) / parseInt(t2) === parseInt(a))
+function calcHelper(t1, t2, operation, a) {
+    if (operation === "x") return (parseInt(t1) * parseInt(t2) === parseInt(a))
+    if (operation === "-") return (parseInt(t1) - parseInt(t2) === parseInt(a))
+    if (operation === "+") return (parseInt(t1) + parseInt(t2) === parseInt(a))
+    if (operation === ":") return (parseInt(t1) / parseInt(t2) === parseInt(a))
 }
 
-
 if (sessionStorage != null) {
-    for(let i = 0;i< sessionStorage.length;i++){
+    for (let i = 0; i < sessionStorage.length; i++) {
         let key = sessionStorage.key(i)
         if (key === "IsThisFirstTime_Log_From_LiveServer") continue
         let current = sessionStorage[key].split(" ")
-        createHistory(`${current[0]} ${current[1]} ${current[2]} = `, current[4], calcHelper(current[0],current[2],current[1],current[4]))
+        createHistory(`${current[0]} ${current[1]} ${current[2]} = `, current[4], calcHelper(current[0], current[2], current[1], current[4]))
     }
 }
-
-
 
 let multiplication = true;
 let division = true;
@@ -65,31 +61,31 @@ let question;
 let answer;
 let generateQuestion = function () {
 
-    let methods = []
+    let operations = []
 
-    if (multiplication === true) methods.push("m")
-    if (division === true) methods.push("d")
-    if (addition === true) methods.push("a")
-    if (subtraction === true) methods.push("s")
+    if (multiplication === true) operations.push("multiplication")
+    if (division === true) operations.push("division")
+    if (addition === true) operations.push("addition")
+    if (subtraction === true) operations.push("subtraction")
 
-    let method = methods[Math.floor(Math.random() * (methods.length))]
+    let operation = operations[Math.floor(Math.random() * (operations.length))]
 
-    switch (method) {
-        case "m":
+    switch (operation) {
+        case "multiplication":
 
             let terms = [Math.ceil(Math.random() * 10), Math.ceil(Math.random() * 10)]
             question = `${terms[0]} x ${terms[1]} =`
             answer = terms[0] * terms[1]
 
             break;
-        case "d":
+        case "division":
 
             let factors = [Math.ceil(Math.random() * 10), Math.ceil(Math.random() * 10)]
             question = `${factors[0] * factors[1]} : ${factors[0]} =`
             answer = (factors[0] * factors[1]) / factors[0]
 
             break;
-        case "s":
+        case "subtraction":
 
             let subTerms = [Math.ceil(Math.random() * 100), Math.ceil(Math.random() * 100)]
 
@@ -101,7 +97,7 @@ let generateQuestion = function () {
         default:
 
             let addTerms = [Math.ceil(Math.random() * 100), Math.ceil(Math.random() * 100)]
-            
+
             question = `${addTerms[0]} + ${addTerms[1]} = `
             answer = addTerms[0] + addTerms[1]
 
@@ -157,13 +153,13 @@ keypad.addEventListener("click", (x) => {
 })
 
 
-resultBtn.addEventListener("click", ()=>{
+resultBtn.addEventListener("click", () => {
     console.log("result clicked")
-    resultsPage.classList.toggle("resultspage-active")
+    resultsPage.classList.toggle("active")
 })
 
-resultsPage.addEventListener("click", (x)=>{
+resultsPage.addEventListener("click", (x) => {
     console.log(x)
 
-    resultsPage.classList.toggle("resultspage-active")
+    resultsPage.classList.toggle("active")
 })
