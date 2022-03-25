@@ -211,7 +211,7 @@ settingsPage.addEventListener("click", (x)=>{
 })
 
 additionRangeElement.addEventListener("input",(x)=>{
-    console.log(x.target.labels[0].innerText = `1 - ${x.target.value}`)
+   x.target.labels[0].innerText = `1 - ${x.target.value}`
 })
 
 additionRangeElement.addEventListener("change",(x)=>{
@@ -219,7 +219,7 @@ additionRangeElement.addEventListener("change",(x)=>{
 })
 
 subtractionRangeElement.addEventListener("input",(x)=>{
-    console.log(x.target.labels[0].innerText = `1 - ${x.target.value}`)
+    x.target.labels[0].innerText = `1 - ${x.target.value}`
 })
 
 subtractionRangeElement.addEventListener("change",(x)=>{
