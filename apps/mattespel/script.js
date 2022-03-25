@@ -11,8 +11,12 @@ const settingsPage = document.querySelector(".settings-page")
 
 const optionsBoxes = document.querySelectorAll(".options-box")
 
-
 const keypad = document.querySelector(".keypad")
+
+const additionRangeElement = document.querySelector("#addition-range") 
+const subtractionRangeElement = document.querySelector("#subtraction-range") 
+
+console.log(additionRangeElement)
 
 let history = []
 let sessionHistoryArr = []
@@ -63,6 +67,9 @@ let division = false;
 let addition = true;
 let subtraction = false;
 
+let additionMax = 50
+let subtractionMax = 50
+
 let challangeMode = false
 
 let question;
@@ -95,7 +102,7 @@ let generateQuestion = function () {
             break;
         case "subtraction":
 
-            let subTerms = [Math.ceil(Math.random() * 50), Math.ceil(Math.random() * 50)]
+            let subTerms = [Math.ceil(Math.random() * subtractionMax), Math.ceil(Math.random() * subtractionMax)]
 
             subTerms = subTerms.sort((a, b) => a - b);
             question = `${subTerms[1]} - ${subTerms[0]} =`
@@ -104,7 +111,7 @@ let generateQuestion = function () {
             break;
         case "addition":
 
-            let addTerms = [Math.ceil(Math.random() * 50), Math.ceil(Math.random() * 50)]
+            let addTerms = [Math.ceil(Math.random() * additionMax), Math.ceil(Math.random() * additionMax)]
 
             question = `${addTerms[0]} + ${addTerms[1]} = `
             answer = addTerms[0] + addTerms[1]
@@ -162,8 +169,6 @@ function handleKey(key) {
 }
 
 document.addEventListener("keydown", (e) => {
-    // ! if answerBox.value + e.key is === answer, then next number
-    // * have to use + e.key because the input don't see the last input
     handleKey(e.key)
     answerBox.innerText = myAnswer
 })
@@ -173,9 +178,7 @@ keypad.addEventListener("click", (x) => {
     answerBox.innerText = myAnswer
 })
 
-
 resultBtn.addEventListener("click", () => {
-    console.log("result clicked")
     resultsPage.classList.toggle("active")
 })
 
@@ -184,7 +187,6 @@ resultsPage.addEventListener("click", (x) => {
 })
 
 settingsBtn.addEventListener("click", ()=>{
-    console.log("settings opened")
     settingsPage.classList.toggle("active")
 })
 
@@ -192,22 +194,35 @@ settingsBtn.addEventListener("click", ()=>{
 settingsPage.addEventListener("click", (x)=>{
     if (x.target === optionsBoxes[0]){
         !x.target.checked ? addition = false : addition = true
-        console.log(addition)
         generateQuestion()
     }
     if (x.target === optionsBoxes[1]){
-        console.log(subtraction)
         !x.target.checked ? subtraction = false : subtraction = true
         generateQuestion()
     }
     if (x.target === optionsBoxes[2]){
-        console.log(multiplication)
         !x.target.checked ? multiplication = false : multiplication = true
         generateQuestion()
     }
     if (x.target === optionsBoxes[3]){
-        console.log(division)
         !x.target.checked ? division = false : division = true
         generateQuestion()
     }
 })
+
+additionRangeElement.addEventListener("input",(x)=>{
+    console.log(x.target.labels[0].innerText = `1 - ${x.target.value}`)
+})
+
+additionRangeElement.addEventListener("change",(x)=>{
+    additionMax = x.target.value
+})
+
+subtractionRangeElement.addEventListener("input",(x)=>{
+    console.log(x.target.labels[0].innerText = `1 - ${x.target.value}`)
+})
+
+subtractionRangeElement.addEventListener("change",(x)=>{
+    subtractionMax = x.target.value
+})
+

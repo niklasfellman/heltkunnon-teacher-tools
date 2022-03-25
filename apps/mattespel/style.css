@@ -180,14 +180,16 @@ nav {
 
 .additional-options {
     display: flex;
-    height:0px;
     overflow: hidden;
+    font-weight: 300;
+}
+
+.additional-options label {
+    padding: 0 .5rem
 }
 
 .options-box{
-
     height:2rem;
-
 }
 
 .active {
