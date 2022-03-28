@@ -1,6 +1,6 @@
 const board = document.querySelector(".board")
 
-let gridSize = 10
+let gridSize = 15
 let boardArr = []
 
 let letters = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","t","u","v","x","y","z","å","ä","ö"]
@@ -15,7 +15,7 @@ for (let i = 0; i < gridSize; i++) {
     }
 }
 
-let words = ["apa", "bur", "sol","längre", "bak", "bit"]
+let words = ["aaa","bbbb","ccccc","dddddd","eeeeeee","fffffffff"]
 
 let placeWordsHelperDirection = function (p, number) {
     if (number < .33) return [p[0]++, p[1]]
@@ -26,6 +26,7 @@ let placeWordsHelperDirection = function (p, number) {
 let placeWords = function (w) {
 
     for (let i = 0; i < words.length; i++) {
+        let history = []
         let current = words[i]
         directionNumber = Math.random()
         let pos = [Math.floor(Math.random() * boardArr.length), Math.floor(Math.random() * boardArr.length)]
@@ -33,10 +34,27 @@ let placeWords = function (w) {
             pos = [Math.floor(Math.random() * boardArr.length), Math.floor(Math.random() * boardArr.length)]
         }
         for (let j = 0; j < current.length; j++) {
+            console.log(history)
+            console.log(pos)
+            if(boardArr[pos[0]][pos[1]].innerText.length != 0){
+                for (let k = 0;k<history.length;k++){
+                    let currentK = history[k].split("-")
+                    boardArr[parseInt(currentK[0])][parseInt(currentK[1])].innerText = ""   
+                }
+                i--
+                break
+            }
+            else{
+
+            history.push(pos.join("-"))
             boardArr[pos[0]][pos[1]].innerText = current[j]
             placeWordsHelperDirection(pos, directionNumber)
+            }
         }
+    
     }
+
+
 }
 
 function fillWithLetters(){
@@ -49,7 +67,6 @@ function fillWithLetters(){
 }
 
 placeWords()
-fillWithLetters()
 
 board.addEventListener("click",(e)=>{
     console.log(e.target.innerText.length)
