@@ -1,6 +1,6 @@
 body {
     background-color: rgb(80, 80, 80);
-    display: grid;
+    display: flex;
     place-content: center;
 }
 
@@ -33,4 +33,18 @@ body {
 
 .cell:hover {
     background-color: beige;
+}
+
+.words-settings{
+
+    padding:1rem;
+    
+}
+
+.words-input{
+    padding:1rem;
+    border:none;
+    min-height: 200px;
+    background-color: aqua;
+    resize: vertical;
 }
