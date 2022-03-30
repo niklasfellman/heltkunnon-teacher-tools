@@ -44,7 +44,7 @@ let placeWords = function (w) {
                     let currentK = history[k].split("-")
                     boardArr[parseInt(currentK[0])][parseInt(currentK[1])].innerText = ""
                     //! troubleshoot style
-                    boardArr[currentK[0]][currentK[1]].style.color = "black"
+                    //boardArr[currentK[0]][currentK[1]].style.color = "black"
                     //!- -  - - - - - - - - - - - - - - 
                 }
                 i--
@@ -53,7 +53,7 @@ let placeWords = function (w) {
                 history.push(pos.join("-"))
                 boardArr[pos[0]][pos[1]].innerText = current[j]
                 //! troubleshoot style
-                boardArr[pos[0]][pos[1]].style.color = "red"
+                //boardArr[pos[0]][pos[1]].style.color = "red"
                 //!- -  - - - - - - - - - - - - - - 
                 placeWordsHelperDirection(pos, directionNumber)
             }
@@ -78,7 +78,7 @@ function clearBoard(){
     }
 }
 
-//placeWords(words)
+placeWords(words)
 fillWithLetters()
 
 board.addEventListener("click", (e) => {
