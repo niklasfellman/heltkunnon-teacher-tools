@@ -37,7 +37,7 @@ let placeWords = function (w) {
             pos = [Math.floor(Math.random() * boardArr.length), Math.floor(Math.random() * boardArr.length)]
         }
         for (let j = 0; j < current.length; j++) {
-            if (boardArr[pos[0]][pos[1]].innerText.length != 0 || pos[0] <= 0 || pos[1] <= 0 ) {
+            if (boardArr[pos[0]][pos[1]].innerText.length != 0 || pos[0] <= 0 || pos[1] <= 0) {
                 for (let k = 0; k < history.length; k++) {
                     let currentK = history[k].split("-")
                     boardArr[parseInt(currentK[0])][parseInt(currentK[1])].innerText = ""
@@ -68,9 +68,9 @@ function fillWithLetters() {
     }
 }
 
-function clearBoard(){
-    for(let i = 0;i<boardArr.length;i++){
-        for(let j = 0;j<boardArr[i].length;j++){
+function clearBoard() {
+    for (let i = 0; i < boardArr.length; i++) {
+        for (let j = 0; j < boardArr[i].length; j++) {
             boardArr[i][j].innerText = ""
         }
     }
@@ -79,58 +79,54 @@ function clearBoard(){
 placeWords(words)
 fillWithLetters()
 
-
-
-createBtn.addEventListener("click", ()=>{
+createBtn.addEventListener("click", () => {
     let newWordsArr = wordsInputElement.value.split("\n")
-    for (let i = 0;i<newWordsArr.length;i++){
+    for (let i = 0; i < newWordsArr.length; i++) {
         newWordsArr[i] = newWordsArr[i].trim()
     }
 
-clearBoard()
-placeWords(newWordsArr)
-fillWithLetters()
+    clearBoard()
+    placeWords(newWordsArr)
+    fillWithLetters()
 
     console.log(newWordsArr)
 })
 
 let clicked = false
-
-
-let dragString = "" 
+let dragString = ""
 let dragHistory = []
 
-
-board.addEventListener("mousedown", (x)=>{
+board.addEventListener("mousedown", (x) => {
     clicked = true
-    if(x.target != board){
-        dragString+=x.target.innerText
+    if (x.target != board) {
+        dragString += x.target.innerText
         dragHistory.push(x.target)
+        x.target.classList.add("active")
     }
 })
 
-board.addEventListener("mouseover",(x)=>{
-    if (clicked && x.target != board){
-       dragString+=x.target.innerText
+board.addEventListener("mouseover", (x) => {
+    if (clicked && x.target != board) {
+        dragString += x.target.innerText
         dragHistory.push(x.target)
-
-}
+        x.target.classList.add("active")
+    }
 })
 
-board.addEventListener("mouseup", (x)=>{
+board.addEventListener("mouseup", (x) => {
     clicked = false
     console.log(dragString)
-    console.log(dragHistory)
-    for(let i = 0;i<words.length;i++){
-        if(words[i].toUpperCase() === dragString.toUpperCase()){
-
+    for (let i = 0; i < words.length; i++) {
+        if (words[i].toUpperCase() === dragString.toUpperCase()) {
             console.log("found one")
-
-            for(let x of dragHistory){
-                x.style.background ="red"
+            for (let x of dragHistory) {
+                x.classList.add("found")
             }
-
+            dragHistory = []
         }
+    }
+    for (let x of dragHistory) {
+        x.classList.remove("active")
     }
     dragHistory = []
     dragString = ""
