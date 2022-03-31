@@ -37,8 +37,6 @@ let placeWords = function (w) {
             pos = [Math.floor(Math.random() * boardArr.length), Math.floor(Math.random() * boardArr.length)]
         }
         for (let j = 0; j < current.length; j++) {
-            console.log(history)
-            console.log(pos)
             if (boardArr[pos[0]][pos[1]].innerText.length != 0 || pos[0] <= 0 || pos[1] <= 0 ) {
                 for (let k = 0; k < history.length; k++) {
                     let currentK = history[k].split("-")
@@ -81,9 +79,6 @@ function clearBoard(){
 placeWords(words)
 fillWithLetters()
 
-board.addEventListener("click", (e) => {
-    console.log(e.target.innerText.length)
-})
 
 
 createBtn.addEventListener("click", ()=>{
@@ -97,4 +92,46 @@ placeWords(newWordsArr)
 fillWithLetters()
 
     console.log(newWordsArr)
+})
+
+let clicked = false
+
+
+let dragString = "" 
+let dragHistory = []
+
+
+board.addEventListener("mousedown", (x)=>{
+    clicked = true
+    if(x.target != board){
+        dragString+=x.target.innerText
+        dragHistory.push(x.target)
+    }
+})
+
+board.addEventListener("mouseover",(x)=>{
+    if (clicked && x.target != board){
+       dragString+=x.target.innerText
+        dragHistory.push(x.target)
+
+}
+})
+
+board.addEventListener("mouseup", (x)=>{
+    clicked = false
+    console.log(dragString)
+    console.log(dragHistory)
+    for(let i = 0;i<words.length;i++){
+        if(words[i].toUpperCase() === dragString.toUpperCase()){
+
+            console.log("found one")
+
+            for(let x of dragHistory){
+                x.style.background ="red"
+            }
+
+        }
+    }
+    dragHistory = []
+    dragString = ""
 })
