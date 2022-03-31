@@ -1,5 +1,5 @@
 body {
-    background-color: rgb(221, 221, 221);
+    background-color: rgb(231, 231, 231);
     display: flex;
     place-content: center;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
@@ -7,9 +7,9 @@ body {
 
 .board {
     background: rgb(255, 255, 255);
-    width: 50rem;
+    width: 30rem;
     display: grid;
-    aspect-ratio: 1/1;
+    aspect-ratio: 1;
     grid-template-columns: repeat(15, 1fr);
     grid-template-rows: repeat(15, 1fr);
     place-items: center;
@@ -18,8 +18,8 @@ body {
 }
 
 .cell {
-    width: 2rem;
-    height: 2rem;
+    width: 1.5rem;
+    height: 1.5rem;
     box-shadow: 0 0 0 .25rem white;
     background: rgb(255, 255, 255);
     cursor: pointer;
@@ -27,7 +27,7 @@ body {
     display: grid;
     place-content: center;
     text-transform: uppercase;
-    font-size: 1.75rem;
+    font-size: 1.5rem;
     transition: 250ms;
     border-radius: 50%;
 }

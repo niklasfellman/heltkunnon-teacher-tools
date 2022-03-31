@@ -80,16 +80,15 @@ placeWords(words)
 fillWithLetters()
 
 createBtn.addEventListener("click", () => {
-    let newWordsArr = wordsInputElement.value.split("\n")
-    for (let i = 0; i < newWordsArr.length; i++) {
-        newWordsArr[i] = newWordsArr[i].trim()
+    words = wordsInputElement.value.split("\n")
+    for (let i = 0; i < words.length; i++) {
+        words[i] = words[i].trim()
     }
 
     clearBoard()
-    placeWords(newWordsArr)
+    placeWords(words)
     fillWithLetters()
 
-    console.log(newWordsArr)
 })
 
 let clicked = false
