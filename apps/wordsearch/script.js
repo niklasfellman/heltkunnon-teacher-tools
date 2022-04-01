@@ -1,6 +1,7 @@
 const board = document.querySelector(".board")
 const wordsInputElement = document.querySelector(".words-input")
 const createBtn = document.querySelector(".create")
+const wordSettings = document.querySelector(".words-settings")
 
 let gridSize = 15
 let boardArr = []
@@ -88,6 +89,12 @@ createBtn.addEventListener("click", () => {
     clearBoard()
     placeWords(words)
     fillWithLetters()
+
+    for(let x of words){
+        let test = document.createElement("p")
+        test.innerText = x
+        wordSettings.append(test)
+    }
 
 })
 
