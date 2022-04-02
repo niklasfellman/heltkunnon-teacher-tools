@@ -32,10 +32,20 @@ let placeWords = function (w) {
     for (let i = 0; i < w.length; i++) {
         let history = []
         let current = w[i]
+        let triesToPlace = 0;
         directionNumber = Math.random()
         let pos = [Math.floor(Math.random() * boardArr.length), Math.floor(Math.random() * boardArr.length)]
         while (pos[0] + current.length > boardArr.length || pos[1] + current.length > boardArr.length) {
             pos = [Math.floor(Math.random() * boardArr.length), Math.floor(Math.random() * boardArr.length)]
+            triesToPlace ++
+            if(triesToPlace > 100){
+                console.log(current)
+                current = w[i+1]
+                i++
+                console.log(current)
+                triesToPlace = 0
+                continue
+            }
         }
         for (let j = 0; j < current.length; j++) {
             if (boardArr[pos[0]][pos[1]].innerText.length != 0 || pos[0] <= 0 || pos[1] <= 0) {
@@ -43,7 +53,7 @@ let placeWords = function (w) {
                     let currentK = history[k].split("-")
                     boardArr[parseInt(currentK[0])][parseInt(currentK[1])].innerText = ""
                     //! troubleshoot style
-                    //boardArr[currentK[0]][currentK[1]].style.color = "black"
+                    boardArr[currentK[0]][currentK[1]].style.color = "black"
                     //!- -  - - - - - - - - - - - - - - 
                 }
                 i--
@@ -52,7 +62,7 @@ let placeWords = function (w) {
                 history.push(pos.join("-"))
                 boardArr[pos[0]][pos[1]].innerText = current[j]
                 //! troubleshoot style
-                //boardArr[pos[0]][pos[1]].style.color = "red"
+                boardArr[pos[0]][pos[1]].style.color = "red"
                 //!- -  - - - - - - - - - - - - - - 
                 placeWordsHelperDirection(pos, directionNumber)
             }
@@ -73,11 +83,14 @@ function clearBoard() {
     for (let i = 0; i < boardArr.length; i++) {
         for (let j = 0; j < boardArr[i].length; j++) {
             boardArr[i][j].innerText = ""
+            //! troubleshoot style
+            boardArr[i][j].style.color = "black"
+            //!- -  - - - - - - - - - - - - - - 
         }
     }
 }
 
-placeWords(words)
+//placeWords(words)
 fillWithLetters()
 
 createBtn.addEventListener("click", () => {
@@ -90,11 +103,11 @@ createBtn.addEventListener("click", () => {
     placeWords(words)
     fillWithLetters()
 
-    for(let x of words){
+   /*  for(let x of words){
         let test = document.createElement("p")
         test.innerText = x
         wordSettings.append(test)
-    }
+    } */
 
 })
 
