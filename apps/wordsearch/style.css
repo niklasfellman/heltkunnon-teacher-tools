@@ -1,12 +1,21 @@
+:root {
+    --main-bg-color : rgb(192, 192, 192);
+    --board-bg-color : white;
+    --cell-bg-color : white;
+
+    --drag-color : pink;
+    --found-color: rgb(198, 255, 255);
+}
+
 body {
-    background-color: rgb(231, 231, 231);
+    background-color: var(--main-bg-color);
     display: flex;
     place-content: center;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 .board {
-    background: rgb(255, 255, 255);
+    background: var(--board-bg-color);
     width: 30rem;
     display: grid;
     aspect-ratio: 1;
@@ -20,8 +29,8 @@ body {
 .cell {
     width: 1.5rem;
     height: 1.5rem;
-    box-shadow: 0 0 0 .25rem white;
-    background: rgb(255, 255, 255);
+    box-shadow: 0 0 0 .25rem var(--cell-bg-color);
+    background: var(--cell-bg-color);
     cursor: pointer;
     user-select: none;
     display: grid;
@@ -44,12 +53,12 @@ body {
 }
 
 .active {
-    background-color: pink;
-    box-shadow: 0 0 0 .25rem pink;
+    background-color: var(--drag-color);
+    box-shadow: 0 0 0 .25rem var(--drag-color);
     border-radius: 50%;
 }
 
 .found {
-    background-color: rgb(99, 248, 228);
-    box-shadow: 0 0 0 .25rem rgb(99,248,228);
+    background-color: var(--found-color);
+    box-shadow: 0 0 0 .25rem var(--found-color);
 }
