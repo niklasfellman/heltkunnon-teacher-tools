@@ -1,0 +1,64 @@
+:root {
+    --main-bg-color : rgb(192, 192, 192);
+    --board-bg-color : white;
+    --cell-bg-color : white;
+
+    --drag-color : pink;
+    --found-color: rgb(198, 255, 255);
+}
+
+body {
+    background-color: var(--main-bg-color);
+    display: flex;
+    place-content: center;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.board {
+    background: var(--board-bg-color);
+    width: 30rem;
+    display: grid;
+    aspect-ratio: 1;
+    grid-template-columns: repeat(15, 1fr);
+    grid-template-rows: repeat(15, 1fr);
+    place-items: center;
+    gap: 0.2rem;
+    padding: 2rem;
+}
+
+.cell {
+    width: 1.5rem;
+    height: 1.5rem;
+    box-shadow: 0 0 0 .25rem var(--cell-bg-color);
+    background: var(--cell-bg-color);
+    cursor: pointer;
+    user-select: none;
+    display: grid;
+    place-content: center;
+    text-transform: uppercase;
+    font-size: 1.5rem;
+    transition: 250ms;
+    border-radius: 50%;
+}
+
+.words-settings {
+    padding: 1rem;
+}
+
+.words-input {
+    padding: 1rem;
+    border: none;
+    min-height: 200px;
+    resize: vertical;
+}
+
+.active {
+    background-color: var(--drag-color);
+    box-shadow: 0 0 0 .25rem var(--drag-color);
+    border-radius: 50%;
+}
+
+.found {
+    background-color: var(--found-color);
+    box-shadow: 0 0 0 .25rem var(--found-color);
+}
