@@ -1,7 +1,7 @@
 :root {
     --main-bg-color : rgb(192, 192, 192);
-    --board-bg-color : white;
-    --cell-bg-color : white;
+    --board-bg-color : rgb(255, 255, 255);
+    --cell-bg-color : rgb(255, 255, 255);
 
     --drag-color : pink;
     --found-color: rgb(198, 255, 255);
@@ -22,7 +22,7 @@ body {
     grid-template-columns: repeat(15, 1fr);
     grid-template-rows: repeat(15, 1fr);
     place-items: center;
-    gap: 0.2rem;
+    gap: 1px;
     padding: 2rem;
 }
 
@@ -39,6 +39,10 @@ body {
     font-size: 1.5rem;
     transition: 250ms;
     border-radius: 50%;
+}
+
+.cell:hover{
+    background-color: aqua;
 }
 
 .words-settings {
