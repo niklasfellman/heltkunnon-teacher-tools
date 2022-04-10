@@ -11,7 +11,7 @@ body {
     background-color: var(--main-bg-color);
     display: flex;
     place-content: center;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+font-family: 'Anek Tamil', sans-serif;
 }
 
 .board {
@@ -36,13 +36,15 @@ body {
     display: grid;
     place-content: center;
     text-transform: uppercase;
-    font-size: 1.5rem;
+    font-size: 1.25rem;
+    font-weight: 500;
     transition: 250ms;
     border-radius: 50%;
 }
 
 .cell:hover{
-    background-color: aqua;
+    background: burlywood;
+    box-shadow: 0 0 0 .20rem burlywood;
 }
 
 .words-settings {
