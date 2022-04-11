@@ -16,7 +16,7 @@ font-family: 'Anek Tamil', sans-serif;
 
 .board {
     background: var(--board-bg-color);
-    width: 30rem;
+    width: 35rem;
     display: grid;
     aspect-ratio: 1;
     grid-template-columns: repeat(15, 1fr);
@@ -53,7 +53,6 @@ font-family: 'Anek Tamil', sans-serif;
 
 .words-input {
     padding: 1rem;
-    border: none;
     min-height: 200px;
     resize: vertical;
 }
@@ -67,4 +66,47 @@ font-family: 'Anek Tamil', sans-serif;
 .found {
     background-color: var(--found-color);
     box-shadow: 0 0 0 .25rem var(--found-color);
+}
+
+.settings {
+    width:15rem;
+    padding: 2rem 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+
+}
+
+.word-list {
+    margin-top:40px;
+    position: relative;
+    list-style: none;
+    width:11rem;
+    padding: 0rem 2rem;
+    height:0rem;
+    overflow:hidden;
+    background-color: rgb(255, 255, 255);
+    position:absolute;
+    transition: 260ms;
+}
+
+.word-list-active{
+    height:30rem;
+    transform: scale(1);
+    animation-name: show-word-list;
+    animation-duration: 500ms;
+}
+
+@keyframes show-word-list {
+    0% {
+        transform: scale(0,0);
+    }
+
+    50% {
+        transform: scale(0.1,1);
+    }
+    100% {
+        transform: scale(1,1);
+    }
 }

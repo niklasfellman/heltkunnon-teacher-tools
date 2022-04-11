@@ -2,15 +2,6 @@ function getRandom(min, max) {
     return Math.floor(Math.random() * (Math.floor(max) - Math.ceil(min) + 1) + Math.ceil(min));
 }
 
-
-
-//! TROUBLESHOOTING REMOVE LATER
-let tsBoard = document.querySelector(".ts-board")
-tsBoard.addEventListener("click", () => {
-    console.log(test)
-})
-//! - - - - - - - - - - - - - - -
-
 const letters = "abcdefghijklmnopqrstuvxyzöäå"
 let sampleWords = new Array("backscattering", "apple", "pear", "mango", "banana", "orange", "pineapple", "plum", "grapefruit", "watermelon", "tomato", "appricot", "tangerine", "dragonfruit")
 
@@ -116,15 +107,9 @@ class Board {
         }
 
         for (let i = 0; i < w.length; i++) {
-
             let newWord = new Word(w[i], (255 / w.length) * i)
-
             this.words.push(newWord)
             this.words[i].newPosition()
-
-
-
-
         }
 
         for (let x of this.words) {
@@ -177,11 +162,19 @@ class Board {
     }
 
     clearBoard() {
+        this.words = []
+        this.cells = []
+        this.wordList = []
         let child = this.domElement.lastElementChild
+        let listChild = this.wordListDom.lastElementChild
         while (child) {
             this.domElement.removeChild(child)
             child = this.domElement.lastElementChild
         }
+        while(listChild){
+        this.wordListDom.removeChild(listChild)
+            listChild = this.wordListDom.lastElementChild
+        }    
     }
 }
 
@@ -245,4 +238,36 @@ board.domElement.addEventListener("mouseup", (e) => {
 
     dragHistory = []
     clicked = false
+})
+
+const wordListButton = document.querySelector(".word-list-btn")
+const generateButton = document.querySelector(".generate-btn")
+const wordList = document.querySelector(".word-list")
+
+wordListButton.addEventListener("click", ()=>{
+
+    wordList.classList.toggle("word-list-active")
+
+})
+
+const wordInputArea = document.querySelector(".words-input")
+console.log(wordInputArea)
+
+const createButton = document.querySelector(".create")
+
+console.log(createButton)
+
+createButton.addEventListener("click", ()=>{
+
+    let words = wordInputArea.value.split("\n")
+    for (let i = 0;i<words.length;i++){
+        words[i] = words[i].trim()
+    }
+
+console.log(words)
+
+board.clearBoard()
+board.makeBoard(words)
+
+    wordList.classList.add("word-list-active")
 })
