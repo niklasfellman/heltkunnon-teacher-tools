@@ -1,9 +1,14 @@
+'use strict';
+
 function getRandom(min, max) {
     return Math.floor(Math.random() * (Math.floor(max) - Math.ceil(min) + 1) + Math.ceil(min));
 }
 
+const winElement = document.querySelector(".win")
+
 const letters = "abcdefghijklmnopqrstuvxyzöäå"
-let sampleWords = new Array("backscattering", "apple", "pear", "mango", "banana", "orange", "pineapple", "plum", "grapefruit", "watermelon", "tomato", "appricot", "tangerine", "dragonfruit")
+let sampleWords = new Array("backscattering", "GoldenDelicious", "eggplant", "strawberry", "kiwi", "passionfruit", "peach", "avocado", "honeydew", "apple", "pear", "mango", "banana", "orange", "pineapple", "plum", "grapefruit", "watermelon", "tomato", "apricot", "tangerine", "dragonfruit")
+
 
 class Cell {
     constructor(pos = "1-1") {
@@ -37,27 +42,25 @@ class Word {
         this.color = color
         this.tries = 0
         this.skipped = false
+        this.found = false
     }
 
     newPosition() {
-
         this.tries++
-
         if (this.tries % 5) this.random = Math.random()
-
         let length = this.word.length
         if (this.random > .75) {
-            this.position.x = getRandom(0, (14 - length))
-            this.position.y = getRandom(0, 14)
+            this.position.x = getRandom(0, (15 - length))
+            this.position.y = getRandom(0, 15)
         } else if (this.random > .50) {
-            this.position.x = getRandom(0, 14)
-            this.position.y = getRandom(0, (14 - length))
+            this.position.x = getRandom(0, 15)
+            this.position.y = getRandom(0, (15 - length))
         } else if (this.random > .25) {
-            this.position.x = getRandom(0, (14 - length))
-            this.position.y = getRandom(0, (14 - length))
+            this.position.x = getRandom(0, (15 - length))
+            this.position.y = getRandom(0, (15 - length))
         } else {
-            this.position.x = getRandom(length, 14)
-            this.position.y = getRandom(0, (14 - length))
+            this.position.x = getRandom(length, 15)
+            this.position.y = getRandom(0, (15 - length))
         }
     }
 
@@ -83,11 +86,10 @@ class Word {
             x.domElement.style.boxShadow = `0 0 0 .25rem hsl(${this.color},70%,80%)`
         }
     }
-
 }
 
 class Board {
-    constructor(size = 15) {
+    constructor(size = 16) {
         this.size = size
         this.domElement = document.querySelector(".board")
         this.wordList = []
@@ -112,15 +114,6 @@ class Board {
             this.words[i].newPosition()
         }
 
-        for (let x of this.words) {
-            let newListItem = document.createElement("li")
-            newListItem.innerText = x.word.toUpperCase()
-            this.wordList.push(newListItem)
-            this.wordListDom.append(newListItem)
-        }
-
-        console.log(this.wordList)
-
         for (let i = 0; i < this.words.length; i++) {
             let failed = false
             for (let j = 0; j < this.words[i].length; j++) {
@@ -138,6 +131,7 @@ class Board {
                 if (this.words[i].tries > 100) {
                     this.words[i].skipped = true
                     console.log("skipped " + this.words[i].word)
+                    this.words[i].found = true
                     continue
                 }
                 this.words[i].cells = []
@@ -152,13 +146,15 @@ class Board {
                 }
             }
         }
-
-        //! should go to when you find the word, here for troubleshooting
-        /*  for (let x of this.words){
-             if(!x.skipped)x.updateBackground()
-         } */
-        //! -----------------------------------------------------------
-
+       
+        for (let x of this.words) {
+            if (!x.skipped) {
+                let newListItem = document.createElement("li")
+                newListItem.innerText = x.word.toUpperCase()
+                this.wordList.push(newListItem)
+                this.wordListDom.append(newListItem)
+            }
+        }
     }
 
     clearBoard() {
@@ -171,30 +167,27 @@ class Board {
             this.domElement.removeChild(child)
             child = this.domElement.lastElementChild
         }
-        while(listChild){
-        this.wordListDom.removeChild(listChild)
+        while (listChild) {
+            this.wordListDom.removeChild(listChild)
             listChild = this.wordListDom.lastElementChild
-        }    
+        }
     }
+
+    checkWin() {
+        for (let x of this.words) {
+            if (!x.found) {
+                return false
+            }
+        }
+        return true
+    }
+
+
 }
 
 let board = new Board()
 
 board.makeBoard(sampleWords)
-
-/* boardElement.addEventListener("click", (e) => {
-
-    let position = e.target.dataset.position.split("-")
-    console.log(position)
-    let cell = test.cells[position[0]][position[1]]
-
-    cell.domElement.classList.add("active")
-
-    console.log(cell)
-    if (cell.inWord) {
-        console.log(cell.inWord)
-    }
-}) */
 
 let dragHistory = []
 let clicked = false
@@ -215,7 +208,6 @@ board.domElement.addEventListener("mouseover", (e) => {
 })
 
 board.domElement.addEventListener("mouseup", (e) => {
-
     let draggedWord = ""
     for (let cell of dragHistory) {
         cell.classList.remove("active")
@@ -225,49 +217,66 @@ board.domElement.addEventListener("mouseup", (e) => {
     for (let w of board.words) {
         if (w.word.toUpperCase() === draggedWord) {
             console.log("found one")
+            w.found = true
             w.updateBackground()
         }
     }
 
-    for(let w of board.wordList){
-        if(w.innerText === draggedWord.toUpperCase()){
+    for (let w of board.wordList) {
+        if (w.innerText === draggedWord.toUpperCase()) {
+            w.found = true
             w.style.textDecoration = "line-through"
         }
     }
 
-
     dragHistory = []
     clicked = false
+
+    if (board.checkWin()) {
+        winElement.classList.add("win-active")
+    }
+
 })
 
 const wordListButton = document.querySelector(".word-list-btn")
 const generateButton = document.querySelector(".generate-btn")
 const wordList = document.querySelector(".word-list")
 
-wordListButton.addEventListener("click", ()=>{
-
+wordListButton.addEventListener("click", () => {
     wordList.classList.toggle("word-list-active")
-
 })
 
 const wordInputArea = document.querySelector(".words-input")
-console.log(wordInputArea)
-
 const createButton = document.querySelector(".create")
 
-console.log(createButton)
-
-createButton.addEventListener("click", ()=>{
+createButton.addEventListener("click", () => {
 
     let words = wordInputArea.value.split("\n")
-    for (let i = 0;i<words.length;i++){
+    for (let i = 0; i < words.length; i++) {
         words[i] = words[i].trim()
     }
 
-console.log(words)
+    board.clearBoard()
 
-board.clearBoard()
-board.makeBoard(words)
+    console.log(words.length)
+
+    console.log(words)
+
+
+    if (words.length <= 1 && words[0] === ""){
+        board.makeBoard(sampleWords)
+    }
+    else{
+    board.makeBoard(words)
+    }
+
 
     wordList.classList.add("word-list-active")
+    winElement.classList.remove("win-move")
+    winElement.classList.remove("win-active")
+})
+
+winElement.addEventListener("click", () => {
+    winElement.classList.toggle("win-move")
+
 })
