@@ -255,12 +255,16 @@ createButton.addEventListener("click", () => {
     for (let i = 0; i < words.length; i++) {
         words[i] = words[i].trim()
     }
-
     board.clearBoard()
 
     console.log(words.length)
-
     console.log(words)
+
+    for(let i = 0;i<words.length;i++){
+        if(words[i].length > 15){
+            console.log("skipped " + words.splice(i,1)[0])
+        }
+    }
 
 
     if (words.length <= 1 && words[0] === ""){
