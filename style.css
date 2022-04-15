@@ -11,9 +11,14 @@ body{
 
 ul {
     list-style: none;
-    margin-top: 10vh;
     font-family: 'Courier New', Courier, monospace;
     line-height: 1.5rem;
+}
+
+.navigation {
+
+    margin-top:10vh;
+
 }
 
 a {
@@ -23,4 +28,15 @@ a {
 
 a:hover {
     color:rgb(36, 33, 33);
+}
+
+.language {
+    position: absolute;
+    top:0;
+    left:10vw;
+    display: flex;
+}
+
+.language li {
+    margin:0 1rem 0 1rem
 }
