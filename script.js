@@ -9,7 +9,4 @@ console.log(languageEl)
 let test = document.createElement("li")
 
 test.setAttribute("W","w")
-
-console.log(test)
-
 languageEl.append(test)
