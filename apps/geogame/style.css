@@ -1,0 +1,27 @@
+
+body{
+    display: flex;
+    align-items: center;
+    justify-content:center ;
+    height:95vh;
+}
+
+.board{
+}
+
+#map {
+    height:600px;
+    width:900px;
+}
+
+.country{
+    pointer-events: all;
+    fill:rgb(180, 180, 180);
+    stroke:none;
+    transition: 200ms;
+    cursor: pointer;
+}
+
+.country:hover {
+    fill:orange;
+}
