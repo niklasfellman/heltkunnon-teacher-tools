@@ -7,11 +7,15 @@ body{
 }
 
 .board{
+
 }
 
 #map {
     height:600px;
     width:900px;
+}
+
+.map {
 }
 
 .country{

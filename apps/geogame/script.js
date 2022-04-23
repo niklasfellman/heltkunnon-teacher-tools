@@ -2,6 +2,11 @@
 let test = document.querySelectorAll("path")
 let boardElement = document.querySelector(".board")
 
+let test2 = document.querySelector(".map")
+console.log(test2)
+let test3 = test2.querySelector("#document")
+console.log(test3)
+
 class Country{
     constructor(dom){
         this.domElement = dom 
