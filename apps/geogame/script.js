@@ -1,11 +1,5 @@
-
 let test = document.querySelectorAll("path")
 let boardElement = document.querySelector(".board")
-
-let test2 = document.querySelector(".map")
-console.log(test2)
-let test3 = test2.querySelector("#document")
-console.log(test3)
 
 class Country{
     constructor(dom){
@@ -22,7 +16,6 @@ class Country{
 let countries = []
 
 for(let i = 0;i<test.length;i++){
-    //test[i].style.fill = `hsl(${(255/test.length) * i},60%,70%)`
     countries.push(new Country(test[i]))
 
     console.log(countries[i].name)
@@ -30,4 +23,16 @@ for(let i = 0;i<test.length;i++){
 
 boardElement.addEventListener("click", (e)=>{
     console.log(e.target.id)
+
+    let clickedName = e.target.id
+    let clickedCountry;
+    for (let x of countries){
+        if(x.name === clickedName){
+         clickedCountry = x
+            x.changeColor()
+        }
+    }
+
+    console.log(clickedCountry)
+
 })
