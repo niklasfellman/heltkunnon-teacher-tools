@@ -1,31 +1,34 @@
-
-body{
-    display: flex;
-    align-items: center;
-    justify-content:center ;
-    height:95vh;
+* {
+    margin: 0;
+    padding: 0;
 }
 
-.board{
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 99vh;
+}
 
+.board {
+    background:rgb(221, 221, 221)
 }
 
 #map {
-    height:600px;
-    width:900px;
+    border: 1px solid red;
+    width: 97vmin;
+
 }
 
-.map {
-}
-
-.country{
+.country {
     pointer-events: all;
-    fill:rgb(180, 180, 180);
-    stroke:none;
+    fill: rgb(180, 180, 180);
+    stroke: rgb(122, 122, 122);
+    stroke-width: .5px;
     transition: 200ms;
     cursor: pointer;
 }
 
 .country:hover {
-    fill:orange;
+    fill: orange;
 }

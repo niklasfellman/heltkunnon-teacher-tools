@@ -18,7 +18,7 @@ let countries = []
 for(let i = 0;i<test.length;i++){
     countries.push(new Country(test[i]))
 
-    console.log(countries[i].name)
+    //console.log(countries[i].name)
 }
 
 boardElement.addEventListener("click", (e)=>{
@@ -32,7 +32,5 @@ boardElement.addEventListener("click", (e)=>{
             x.changeColor()
         }
     }
-
     console.log(clickedCountry)
-
 })
