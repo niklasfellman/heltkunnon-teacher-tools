@@ -1,6 +1,8 @@
 let test = document.querySelectorAll("path")
 let boardElement = document.querySelector(".board")
 
+let countryToFindElement = document.querySelector(".country-to-find") 
+
 class Country{
     constructor(dom){
         this.domElement = dom 
@@ -14,23 +16,32 @@ class Country{
 }
 
 let countries = []
-
+let countriesToFind = []
 for(let i = 0;i<test.length;i++){
     countries.push(new Country(test[i]))
-
+    countriesToFind.push(countries[i].name)
     //console.log(countries[i].name)
 }
 
-boardElement.addEventListener("click", (e)=>{
-    console.log(e.target.id)
+let currentCountry = countriesToFind.pop()
+countryToFindElement.innerText = currentCountry
 
+boardElement.addEventListener("click", (e)=>{
     let clickedName = e.target.id
     let clickedCountry;
     for (let x of countries){
         if(x.name === clickedName){
          clickedCountry = x
-            x.changeColor()
         }
     }
-    console.log(clickedCountry)
-})
+    console.log(clickedCountry.name)
+
+    if(clickedCountry.name === currentCountry){
+        clickedCountry.changeColor()
+        currentCountry = countriesToFind.pop()
+        countryToFindElement.innerText = currentCountry
+    }
+
+}
+)
+

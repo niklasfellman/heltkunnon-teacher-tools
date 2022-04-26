@@ -11,13 +11,13 @@ body {
 }
 
 .board {
-    background:rgb(221, 221, 221)
+    background:rgb(255, 255, 255);
+    
 }
 
 #map {
     border: 1px solid red;
     width: 97vmin;
-
 }
 
 .country {
