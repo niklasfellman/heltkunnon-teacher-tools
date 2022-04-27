@@ -35,10 +35,12 @@ boardElement.addEventListener("click", (e)=>{
         }
     }
     console.log(clickedCountry.name)
-
+    console.log(currentCountry)
     if(clickedCountry.name === currentCountry){
         clickedCountry.changeColor()
-        currentCountry = countriesToFind.pop()
+        currentCountry = countriesToFind.splice(Math.floor(Math.random()*countriesToFind.length),1)[0]
+       console.log(countriesToFind)
+        //currentCountry = countriesToFind.pop()
         countryToFindElement.innerText = currentCountry
     }
 

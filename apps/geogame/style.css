@@ -32,3 +32,18 @@ body {
 .country:hover {
     fill: orange;
 }
+
+.dashboard {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    font-family: 'Courier New', Courier, monospace;
+    color:rgb(56, 56, 56)
+}
+
+.country-to-find{
+    font-size: 2rem;
+    text-transform: capitalize;
+    font-weight: 600;
+}
